@@ -15,10 +15,23 @@ public class Training {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private LocalDate date;
-    private int distanceInKilometer;
+    private double distanceInKilometer;
     private Duration duration;
     private double kCalBurned;
     private String comment;
+
+    public Training() {
+
+    }
+
+    public Training(LocalDate date, double distanceInKilometer, Duration duration, double kCalBurned, String comment) {
+	super();
+	this.date = date;
+	this.distanceInKilometer = distanceInKilometer;
+	this.duration = duration;
+	this.kCalBurned = kCalBurned;
+	this.comment = comment;
+    }
 
     public int getId() {
 	return id;
@@ -36,11 +49,11 @@ public class Training {
 	this.date = date;
     }
 
-    public int getDistanceInKilometer() {
+    public double getDistanceInKilometer() {
 	return distanceInKilometer;
     }
 
-    public void setDistanceInKilometer(int distanceInKilometer) {
+    public void setDistanceInKilometer(double distanceInKilometer) {
 	this.distanceInKilometer = distanceInKilometer;
     }
 
