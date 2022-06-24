@@ -44,4 +44,15 @@ class TrainingControllerTest {
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
+    @Test
+    void whenGetExistingTraining_thenReturn200Status() {
+	Training training = new Training(LocalDate.now(), 5, Duration.ofMinutes(30), 500, "Bitten by a dog.");
+	ResponseEntity<Training> persistedTraining = restTemplate.postForEntity(url, training, Training.class);
+
+	ResponseEntity<Training> response = restTemplate
+		.getForEntity(url + "/trainings/" + persistedTraining.getBody().getId(), Training.class);
+
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
 }
