@@ -22,4 +22,8 @@ public class TrainingService {
 	return this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
+    public Iterable<Training> getAllTrainings() {
+	return repository.findAll();
+    }
+
 }

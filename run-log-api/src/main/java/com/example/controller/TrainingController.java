@@ -24,9 +24,14 @@ public class TrainingController {
     public Training addTraining(Training training) {
 	return service.saveTraining(training);
     }
-    
+
     @GetMapping(value = "/trainings/{id}")
     public Training geTraining(@PathVariable("id") int id) {
 	return this.service.getTraining(id);
+    }
+
+    @GetMapping(value = "/trainings/all")
+    public Iterable<Training> getAllTrainings() {
+	return service.getAllTrainings();
     }
 }

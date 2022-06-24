@@ -55,4 +55,17 @@ class TrainingControllerTest {
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
+    @Test
+    void whenGetAllTrainings_thenReturnTwoEntities() {
+	Training training1 = new Training(LocalDate.now(), 5, Duration.ofMinutes(30), 500, "Bitten by a dog.");
+	Training training2 = new Training(LocalDate.now(), 10, Duration.ofMinutes(45), 1200,
+		"I got lost in the woods.");
+	restTemplate.postForEntity(url, training1, Training.class);
+	restTemplate.postForEntity(url, training2, Training.class);
+
+	ResponseEntity<Training[]> response = restTemplate.getForEntity(url + "/trainings/all", Training[].class);
+
+	assertThat(response.getBody()).hasSize(2);
+    }
+
 }
