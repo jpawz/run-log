@@ -8,15 +8,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Training {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
     private double distanceInKilometer;
-    private Duration duration;
+    private long duration;
     private double kCalBurned;
     private String comment;
 
@@ -24,7 +28,7 @@ public class Training {
 
     }
 
-    public Training(LocalDate date, double distanceInKilometer, Duration duration, double kCalBurned, String comment) {
+    public Training(LocalDate date, double distanceInKilometer, long duration, double kCalBurned, String comment) {
 	super();
 	this.date = date;
 	this.distanceInKilometer = distanceInKilometer;
@@ -57,11 +61,11 @@ public class Training {
 	this.distanceInKilometer = distanceInKilometer;
     }
 
-    public Duration getDuration() {
+    public long getDuration() {
 	return duration;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(long duration) {
 	this.duration = duration;
     }
 
