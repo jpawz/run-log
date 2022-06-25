@@ -1,4 +1,4 @@
-<form action="#" th:action="@{/update/{id}(id=${training.id})}" th:object="${training}" method="post">
+<form action="#" th:action="@{/add}" th:object="${training}" method="post">
     <label for="name">Date:</label>
     <input type="date" th:field="*{date}" id="date" placeholder="Date"><br>
     <label for="distance">Distance (kilometers):</label>
@@ -9,5 +9,5 @@
     <input type="number" th:field="*{kCalBurned}" id="kcal" placeholder="Calories"><br>
     <label for="comment">Comment:</label>
     <input type="text" th:field="*{comment}" id="comment" placeholder="Comment"><br>
-    <input type="submit" value="Update Training">   
+    <input type="submit" value="Add Training">   
 </form>

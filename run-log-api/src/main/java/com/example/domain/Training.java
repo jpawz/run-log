@@ -1,6 +1,5 @@
 package com.example.domain;
 
-import java.time.Duration;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;

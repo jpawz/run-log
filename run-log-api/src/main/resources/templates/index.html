@@ -28,11 +28,12 @@
 					<td th:text="${training.distanceInKilometer}"></td>
 					<td th:text="${training.kCalBurned}"></td>
 					<td th:text="${training.comment}"></td>
+					<td><a th:href="@{/edit/{id}(id=${training.id})}">Edit</a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<p><a th:href="@{/edit}">Add Training</a></p>
+	<p><a th:href="@{/add}">Add Training</a></p>
 </body>
 
 </html>

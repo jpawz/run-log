@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.example.domain.Training;
 import com.example.service.TrainingService;
@@ -21,16 +22,30 @@ public class TrainingController {
 	model.addAttribute("trainings", service.getAllTrainings());
 	return "index";
     }
-    
-    @GetMapping("/edit")
-    public String editTraining(Training training) {
+
+    @GetMapping("/add")
+    public String addTrainingForm(Training training) {
+	return "add";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editTrainingForm(@PathVariable("id") int id, Model model) {
+	Training training = service.getTraining(id);
+	model.addAttribute("training", training);
 	return "edit";
     }
-    
+
+    @PostMapping("/update/{id}")
+    public String showUpdateForm(@PathVariable("id") int id, Training training, Model model) {
+	service.saveTraining(training);
+
+	return "redirect:/index";
+    }
+
     @PostMapping("/add")
     public String addTraining(Training training, Model model) {
 	service.saveTraining(training);
-	return "edit";
+	return "redirect:/index";
     }
 
     @GetMapping(value = "/trainings/{id}")
