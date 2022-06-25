@@ -17,6 +17,7 @@
 					<th>Date</th>
 					<th>Duration</th>
 					<th>Distance</th>
+					<th>Avg speed (km/h)</th>
 					<th>Calories</th>
 					<th>Comments</th>
 					<th>Edit</th>
@@ -28,6 +29,7 @@
 					<td th:text="${training.date}"></td>
 					<td th:text="${training.duration}"></td>
 					<td th:text="${training.distanceInKilometer}"></td>
+					<td th:text="${#numbers.formatDecimal(training.distanceInKilometer/(training.duration/(60*60)), 2, 2)}"></td>
 					<td th:text="${training.kCalBurned}"></td>
 					<td th:text="${training.comment}"></td>
 					<td><a th:href="@{/edit/{id}(id=${training.id})}">Edit</a></td>
