@@ -1,14 +1,38 @@
 <!DOCTYPE HTML>
 
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8" />
 	<title>Run Log</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
+
 <body>
-	<a th:href="@{/}">Trainings List</a>
-	<a th:href="@{/edit}">Add Training</a>
-	
+	<div th:switch="${trainings}">
+		<h2>Trainings</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Duration</th>
+					<th>Distance</th>
+					<th>Calories</th>
+					<th>Comments</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="training : ${trainings}">
+					<td th:text="${training.date}"></td>
+					<td th:text="${training.duration}"></td>
+					<td th:text="${training.distanceInKilometer}"></td>
+					<td th:text="${training.kCalBurned}"></td>
+					<td th:text="${training.comment}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<p><a th:href="@{/edit}">Add Training</a></p>
 </body>
+
 </html>
