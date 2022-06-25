@@ -3,10 +3,10 @@ package com.example.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import com.example.domain.Training;
 import com.example.service.TrainingService;
@@ -46,6 +46,14 @@ public class TrainingController {
     public String addTraining(Training training, Model model) {
 	service.saveTraining(training);
 	return "redirect:/index";
+    }
+    
+    @GetMapping("/delete/{id}")
+    public String deleteTraiing(@PathVariable("id") int id, Model model) {
+        Training training = service.getTraining(id);
+        service.deleteTraining(training);
+        
+        return "redirect:/index";
     }
 
     @GetMapping(value = "/trainings/{id}")

@@ -19,6 +19,8 @@
 					<th>Distance</th>
 					<th>Calories</th>
 					<th>Comments</th>
+					<th>Edit</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,6 +31,7 @@
 					<td th:text="${training.kCalBurned}"></td>
 					<td th:text="${training.comment}"></td>
 					<td><a th:href="@{/edit/{id}(id=${training.id})}">Edit</a></td>
+					<td><a th:href="@{/delete/{id}(id=${training.id})}">Delete</a></td>
 				</tr>
 			</tbody>
 		</table>
