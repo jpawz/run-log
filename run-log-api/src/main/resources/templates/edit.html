@@ -1,0 +1,13 @@
+<form action="#" th:action="@{/edit}" th:object="${training}" method="post">
+    <label for="name">Date:</label>
+    <input type="text" th:field="*{date}" id="date" placeholder="Date"><br>
+    <label for="distance">Distance (kilometers):</label>
+    <input type="text" th:field="*{distanceInKilometer}" id="distance" placeholder="Distance"><br>
+    <label for="duration">Duration (minutes):</label>
+    <input type="text" th:field="*{duration}" id="duration" placeholder="Duration"><br>
+    <label for="kcal">Calories burned:</label>
+    <input type="text" th:field="*{kCalBurned}" id="kcal" placeholder="Calories"><br>
+    <label for="comment">Comment:</label>
+    <input type="text" th:field="*{comment}" id="comment" placeholder="Comment"><br>
+    <input type="submit" value="Add Training">   
+</form>
