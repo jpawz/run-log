@@ -2,19 +2,34 @@ package com.example.domain;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class TrainingDTO {
 
     private int id;
+
+    @NotNull(message = "Choose date of the training")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+
+    @Min(value = 0, message = "Wrong distance value")
     private double distanceInKilometer;
+
     private double kCalBurned;
     private String comment;
+
+    @Min(value = 0, message = "Wrong duration (hours)")
     private int durationH;
+
+    @Min(value = 0, message = "Wrong duration (minutes)")
     private int durationM;
+
+    @Min(value = 0, message = "Wrong duration (seconds)")
     private int durationS;
+    
     private double avgSpeed;
 
     public double getAvgSpeed() {

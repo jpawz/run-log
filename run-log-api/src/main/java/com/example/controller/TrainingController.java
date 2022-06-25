@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,14 +51,24 @@ public class TrainingController {
     }
 
     @PostMapping("/update/{id}")
-    public String showUpdateForm(@PathVariable("id") int id, TrainingDTO trainingdto, Model model) {
-	service.saveTraining(mapper.toTraining(trainingdto));
+    public String showUpdateForm(@PathVariable("id") int id, @Valid TrainingDTO trainingdto,
+	    BindingResult bindingResult, Model model) {
+	if (bindingResult.hasErrors()) {
+	    model.addAttribute("trainingdto", trainingdto);
+	    return "edit";
+	}
 
+	service.saveTraining(mapper.toTraining(trainingdto));
 	return "redirect:/index";
     }
 
     @PostMapping("/add")
-    public String addTrainingdto(TrainingDTO trainingdto, Model model) {
+    public String addTrainingdto(@Valid TrainingDTO trainingdto, BindingResult bindingResult, Model model) {
+	if (bindingResult.hasErrors()) {
+	    model.addAttribute("trainingdto", trainingdto);
+	    return "add";
+	}
+
 	service.saveTraining(mapper.toTraining(trainingdto));
 	return "redirect:/index";
     }
