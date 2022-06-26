@@ -1,15 +1,31 @@
-<form action="#" th:action="@{/add}" th:object="${trainingdto}" method="post">
-	<label for="name">Date:</label>
-	<input type="date" th:field="*{date}" id="date" placeholder="Date"><br>
-	<label for="distance">Distance (kilometers):</label>
-	<input type="number" th:field="*{distanceInKilometer}" id="distance" placeholder="Distance"><br>
-	<label for="duration">Duration (hh:mm:ss):</label>
-	<input type="number" th:field="*{durationH}" id="durationH" placeholder="">:
-	<input type="number" th:field="*{durationM}" id="durationM" placeholder="">:
-	<input type="number" th:field="*{durationS}" id="durationS" placeholder=""><br>
-	<label for="kcal">Calories burned:</label>
-	<input type="number" th:field="*{kCalBurned}" id="kcal" placeholder="Calories"><br>
-	<label for="comment">Comment:</label>
-	<input type="text" th:field="*{comment}" id="comment" placeholder="Comment"><br>
-	<input type="submit" value="Add Training">
-</form>
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Run Log</title>
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body>
+	<form action="#" th:action="@{/add}" th:object="${trainingdto}" method="post">
+		<div class="form-group">
+			<label for="name">Date:</label>
+			<input type="date" th:field="*{date}" id="date" placeholder="Date"><br>
+			<label for="distance">Distance (kilometers):</label>
+			<input type="number" th:field="*{distanceInKilometer}" id="distance" placeholder="Distance"><br>
+			<label for="duration">Duration (hh:mm:ss):</label>
+			<input type="number" th:field="*{durationH}" id="durationH" placeholder="">:
+			<input type="number" th:field="*{durationM}" id="durationM" placeholder="">:
+			<input type="number" th:field="*{durationS}" id="durationS" placeholder=""><br>
+			<label for="kcal">Calories burned:</label>
+			<input type="number" th:field="*{kCalBurned}" id="kcal" placeholder="Calories"><br>
+			<label for="comment">Comment:</label>
+			<input type="text" th:field="*{comment}" id="comment" placeholder="Comment"><br>
+			<input type="submit" value="Add Training" class="btn btn-primary">
+		</div>
+	</form>
+</body>
+
+</html>
