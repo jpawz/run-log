@@ -74,10 +74,8 @@ public class TrainingController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteTraiing(@PathVariable("id") int id, Model model) {
-	Training training = service.getTraining(id);
-	service.deleteTraining(training);
-
+    public String deleteTraining(@PathVariable("id") int id, Model model) {
+	service.deleteTrainingById(id);
 	return "redirect:/index";
     }
 }

@@ -29,5 +29,9 @@ public class TrainingService {
     public void deleteTraining(Training training) {
 	repository.delete(training);
     }
+    
+    public void deleteTrainingById(int id) {
+	repository.deleteById(id);
+    }
 
 }
