@@ -1,45 +1,40 @@
 package com.example.controller;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDate;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.domain.Training;
+import com.example.mapper.Mapper;
+import com.example.service.TrainingService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestInstance(Lifecycle.PER_CLASS)
+@WebMvcTest
 class TrainingControllerTest {
 
-    @LocalServerPort
-    private int port;
-
-    private String url;
+    @Autowired
+    ObjectMapper objectMapper;
 
     @Autowired
-    private TestRestTemplate restTemplate;
+    MockMvc mockMvc;
 
-    @BeforeEach
-    public void setup() {
-	url = String.format("http://localhost:%d/", port);
-    }
+    @MockBean
+    TrainingService mockService;
+
+    @MockBean
+    Mapper mockMapper;
 
     @Test
-    void whenPostNewTraining_thenRedirect() {
-	Training training = new Training(LocalDate.now(), 5, 1, 500, "Bitten by a dog.");
-
-	ResponseEntity<Training> response = restTemplate.postForEntity(url+"/add", training, Training.class);
-
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FOUND);
+    void shouldOpenInexPage() throws Exception {
+	this.mockMvc.perform(get("/"))
+		.andExpect(status().isOk())
+		.andExpect(content().string(containsString("Trainings")));
     }
+
 }
