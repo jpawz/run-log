@@ -32,6 +32,7 @@ public class Mapper {
 	long duration = (trainingDTO.getDurationH() * 60 * 60) + (trainingDTO.getDurationM() * 60)
 		+ trainingDTO.getDurationS();
 	Training training = new Training();
+	training.setId(trainingDTO.getId());
 	training.setDuration(duration);
 	training.setComment(trainingDTO.getComment());
 	training.setDate(trainingDTO.getDate());

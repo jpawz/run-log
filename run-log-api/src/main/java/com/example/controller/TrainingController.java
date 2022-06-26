@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.domain.Training;
 import com.example.domain.TrainingDTO;
 import com.example.mapper.Mapper;
 import com.example.service.TrainingService;
