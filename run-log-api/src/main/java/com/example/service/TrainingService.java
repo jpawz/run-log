@@ -25,11 +25,7 @@ public class TrainingService {
     public Iterable<Training> getAllTrainings() {
 	return repository.findAll();
     }
-    
-    public void deleteTraining(Training training) {
-	repository.delete(training);
-    }
-    
+
     public void deleteTrainingById(int id) {
 	repository.deleteById(id);
     }
