@@ -25,7 +25,7 @@ public class TrainingController {
     private TrainingService service;
 
     @Autowired
-    Mapper mapper;
+    private Mapper mapper;
 
     @GetMapping(value = { "/", "/index" })
     public String index(Model model) {
@@ -37,35 +37,35 @@ public class TrainingController {
     }
 
     @GetMapping("/add")
-    public String addTrainingdtoForm(TrainingDTO trainingdto, Model model) {
+    public String addTrainingForm(TrainingDTO trainingdto, Model model) {
 	model.addAttribute("trainingdto", trainingdto);
 	return "add";
     }
 
-    @GetMapping("/edit/{id}")
-    public String editTrainingForm(@PathVariable("id") int id, Model model) {
-	TrainingDTO trainingdto = mapper.toDto(service.getTraining(id));
-	model.addAttribute("trainingdto", trainingdto);
-	return "edit";
-    }
-
-    @PostMapping("/update/{id}")
-    public String showUpdateForm(@PathVariable("id") int id, @Valid TrainingDTO trainingdto,
-	    BindingResult bindingResult, Model model) {
+    @PostMapping("/add")
+    public String addNewTraining(@Valid TrainingDTO trainingdto, BindingResult bindingResult, Model model) {
 	if (bindingResult.hasErrors()) {
 	    model.addAttribute("trainingdto", trainingdto);
-	    return "edit";
+	    return "add";
 	}
 
 	service.saveTraining(mapper.toTraining(trainingdto));
 	return "redirect:/index";
     }
 
-    @PostMapping("/add")
-    public String addTrainingdto(@Valid TrainingDTO trainingdto, BindingResult bindingResult, Model model) {
+    @GetMapping("/edit/{id}")
+    public String updateTrainingForm(@PathVariable("id") int id, Model model) {
+	TrainingDTO trainingdto = mapper.toDto(service.getTraining(id));
+	model.addAttribute("trainingdto", trainingdto);
+	return "edit";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateTraining(@PathVariable("id") int id, @Valid TrainingDTO trainingdto,
+	    BindingResult bindingResult, Model model) {
 	if (bindingResult.hasErrors()) {
 	    model.addAttribute("trainingdto", trainingdto);
-	    return "add";
+	    return "edit";
 	}
 
 	service.saveTraining(mapper.toTraining(trainingdto));
