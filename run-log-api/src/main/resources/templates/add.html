@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	<form action="#" th:action="@{/add}" th:object="${trainingdto}" method="post">
+	<form action="#" th:action="@{/add}" th:object="${trainingDTO}" method="post">
 		<div class="form-group">
 			<label for="name">Date:</label>
 			<input type="date" th:field="*{date}" id="date" placeholder="Date"><br>
@@ -24,6 +24,11 @@
 			<label for="comment">Comment:</label>
 			<input type="text" th:field="*{comment}" id="comment" placeholder="Comment"><br>
 			<input type="submit" value="Add Training" class="btn btn-primary">
+		</div>
+		<div th:if="${#fields.hasAnyErrors()}">
+			<ul>
+				<li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+			</ul>
 		</div>
 	</form>
 </body>

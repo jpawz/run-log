@@ -9,8 +9,8 @@
 </head>
 
 <body>
-	<form action="#" th:action="@{/update/{id}(id=${trainingdto.id})}" th:object="${trainingdto}" method="post">
-		<div class="form-group">
+	<form action="#" th:action="@{/update/{id}(id=${trainingDTO.id})}" th:object="${trainingDTO}" method="post">
+		<div> class="form-group">
 			<label for="name">Date:</label>
 			<input type="date" th:field="*{date}" id="date" placeholder="Date"><br>
 			<label for="distance">Distance (kilometers):</label>
@@ -24,8 +24,12 @@
 			<label for="comment">Comment:</label>
 			<input type="text" th:field="*{comment}" id="comment" placeholder="Comment"><br>
 			<input type="submit" value="Update Training" class="btn btn-primary">
-	</form>
-	</div>
+		</div>
+		<div th:if="${#fields.hasAnyErrors()}">
+			<ul>
+				<li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+			</ul>
+		</div>
 	</form>
 </body>
 

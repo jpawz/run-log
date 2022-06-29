@@ -38,37 +38,37 @@ public class TrainingController {
 
     @GetMapping("/add")
     public String addTrainingForm(TrainingDTO trainingdto, Model model) {
-	model.addAttribute("trainingdto", trainingdto);
+	model.addAttribute("trainingDTO", trainingdto);
 	return "add";
     }
 
     @PostMapping("/add")
-    public String addNewTraining(@Valid TrainingDTO trainingdto, BindingResult bindingResult, Model model) {
+    public String addNewTraining(@Valid TrainingDTO trainingDTO, BindingResult bindingResult, Model model) {
 	if (bindingResult.hasErrors()) {
-	    model.addAttribute("trainingdto", trainingdto);
+	    model.addAttribute("trainingDTO", trainingDTO);
 	    return "add";
 	}
 
-	service.saveTraining(mapper.toTraining(trainingdto));
+	service.saveTraining(mapper.toTraining(trainingDTO));
 	return "redirect:/index";
     }
 
     @GetMapping("/edit/{id}")
     public String updateTrainingForm(@PathVariable("id") int id, Model model) {
 	TrainingDTO trainingdto = mapper.toDto(service.getTraining(id));
-	model.addAttribute("trainingdto", trainingdto);
+	model.addAttribute("trainingDTO", trainingdto);
 	return "edit";
     }
 
     @PostMapping("/update/{id}")
-    public String updateTraining(@PathVariable("id") int id, @Valid TrainingDTO trainingdto,
+    public String updateTraining(@PathVariable("id") int id, @Valid TrainingDTO trainingDTO,
 	    BindingResult bindingResult, Model model) {
 	if (bindingResult.hasErrors()) {
-	    model.addAttribute("trainingdto", trainingdto);
+	    model.addAttribute("trainingDTO", trainingDTO);
 	    return "edit";
 	}
 
-	service.saveTraining(mapper.toTraining(trainingdto));
+	service.saveTraining(mapper.toTraining(trainingDTO));
 	return "redirect:/index";
     }
 
