@@ -10,26 +10,7 @@
 
 <body>
 	<form action="#" th:action="@{/update/{id}(id=${trainingDTO.id})}" th:object="${trainingDTO}" method="post">
-		<div> class="form-group">
-			<label for="name">Date:</label>
-			<input type="date" th:field="*{date}" id="date" placeholder="Date" required><br>
-			<label for="distance">Distance (kilometers):</label>
-			<input type="number" th:field="*{distanceInKilometer}" id="distance" placeholder="Distance" min="0"><br>
-			<label for="duration">Duration (hh:mm:ss):</label>
-			<input type="number" th:field="*{durationH}" id="durationH" placeholder="hh" min="0">:
-			<input type="number" th:field="*{durationM}" id="durationM" placeholder="mm" min="0" max="60">:
-			<input type="number" th:field="*{durationS}" id="durationS" placeholder="ss" min="0" max="60"><br>
-			<label for="kcal">Calories burned:</label>
-			<input type="number" th:field="*{kCalBurned}" id="kcal" placeholder="Calories"><br>
-			<label for="comment">Comment:</label>
-			<input type="text" th:field="*{comment}" id="comment" placeholder="Comment"><br>
-			<input type="submit" value="Update Training" class="btn btn-primary">
-		</div>
-		<div th:if="${#fields.hasAnyErrors()}">
-			<ul>
-				<li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
-			</ul>
-		</div>
+		<div th:insert="fragments/form :: form"></div>
 	</form>
 </body>
 
