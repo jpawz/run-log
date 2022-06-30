@@ -2,6 +2,7 @@ package com.example.domain;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -15,19 +16,22 @@ public class TrainingDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
-    @Min(value = 0, message = "Wrong distance value")
+    @Min(value = 0, message = "The distance cannot be set to less than zero.")
     private double distanceInKilometer;
 
     private double kCalBurned;
+    
     private String comment;
 
-    @Min(value = 0, message = "Wrong duration (hours)")
+    @Min(value = 0, message = "The hours cannot be set to less than zero.")
     private int durationH;
 
-    @Min(value = 0, message = "Wrong duration (minutes)")
+    @Min(value = 0, message = "The minutes cannot be set to less than zero.")
+    @Max(value = 59, message = "No more than 59 minutes can be set.")
     private int durationM;
 
-    @Min(value = 0, message = "Wrong duration (seconds)")
+    @Min(value = 0, message = "The seconds cannot be set to less than zero.")
+    @Max(value = 59, message = "No more than 59 seconds can be set.")
     private int durationS;
     
     private double avgSpeed;
