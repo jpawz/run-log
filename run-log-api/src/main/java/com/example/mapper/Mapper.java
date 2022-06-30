@@ -9,9 +9,9 @@ import com.example.domain.TrainingDTO;
 public class Mapper {
 
     public TrainingDTO toDto(Training training) {
-	int durationS = (int) (training.getDuration() % 60);
-	int durationM = (int) ((training.getDuration() / 60) % 60);
-	int durationH = (int) ((training.getDuration() / 60) / 60);
+	int durationS = toSeconds((int) training.getDuration());
+	int durationM = toMinutes((int) training.getDuration());
+	int durationH = toHours((int) training.getDuration());
 
 	TrainingDTO dto = new TrainingDTO();
 
@@ -29,8 +29,8 @@ public class Mapper {
     }
 
     public Training toTraining(TrainingDTO trainingDTO) {
-	long duration = (trainingDTO.getDurationH() * 60 * 60) + (trainingDTO.getDurationM() * 60)
-		+ trainingDTO.getDurationS();
+	long duration = toSeconds(trainingDTO.getDurationH(), trainingDTO.getDurationM(),
+		trainingDTO.getDurationS());
 	Training training = new Training();
 	training.setId(trainingDTO.getId());
 	training.setDuration(duration);
@@ -40,6 +40,22 @@ public class Mapper {
 	training.setkCalBurned(trainingDTO.getkCalBurned());
 
 	return training;
+    }
+
+    private long toSeconds(int hours, int minutes, int seconds) {
+	return (hours * 60 * 60) + (minutes * 60) + seconds;
+    }
+
+    private int toSeconds(int seconds) {
+	return seconds % 60;
+    }
+
+    private int toMinutes(int seconds) {
+	return (seconds / 60) % 60;
+    }
+
+    private int toHours(int seconds) {
+	return (seconds / 60) / 60;
     }
 
 }
