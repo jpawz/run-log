@@ -1,42 +1,40 @@
 package com.example.controller;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.ResponseEntity;
 
-import com.example.mapper.Mapper;
-import com.example.service.TrainingService;
-
-@WebMvcTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class TrainingControllerTest {
 
+    @LocalServerPort
+    private int port;
+
+    private String url;
+
     @Autowired
-    private MockMvc mockMvc;
+    private TestRestTemplate template;
 
-    @MockBean
-    private TrainingService mockService;
-
-    @MockBean
-    private Mapper spyMapper;
-
-    @Test
-    void shouldOpenStartPage() throws Exception {
-	this.mockMvc.perform(get("/"))
-		.andExpect(status().isOk())
-		.andExpect(content().string(containsString("Trainings")));
+    @BeforeEach
+    public void setUp() throws Exception {
+	this.url = "http://localhost:" + port + "/";
     }
 
     @Test
-    void shouldOpenAddNewTrainingPage() throws Exception {
-	this.mockMvc.perform(get("/add"))
-		.andExpect(status().isOk())
-		.andExpect(content().string(containsString("Date")));
+    void shouldOpenStartPage() {
+	ResponseEntity<String> response = template.getForEntity(url, String.class);
+	assertThat(response.getBody()).contains("Trainings");
+    }
+
+    @Test
+    void shouldOpenAddNewTrainingPage() {
+	ResponseEntity<String> response = template.getForEntity(url + "add", String.class);
+	assertThat(response.getBody()).contains("Date:");
     }
 }
