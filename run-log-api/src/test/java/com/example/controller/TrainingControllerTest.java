@@ -13,22 +13,18 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.mapper.Mapper;
 import com.example.service.TrainingService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest
 class TrainingControllerTest {
 
     @Autowired
-    ObjectMapper objectMapper;
-
-    @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @MockBean
-    TrainingService mockService;
+    private TrainingService mockService;
 
     @MockBean
-    Mapper mockMapper;
+    private Mapper spyMapper;
 
     @Test
     void shouldOpenStartPage() throws Exception {
@@ -37,4 +33,10 @@ class TrainingControllerTest {
 		.andExpect(content().string(containsString("Trainings")));
     }
 
+    @Test
+    void shouldOpenAddNewTrainingPage() throws Exception {
+	this.mockMvc.perform(get("/add"))
+		.andExpect(status().isOk())
+		.andExpect(content().string(containsString("Date")));
+    }
 }
