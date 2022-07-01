@@ -31,7 +31,7 @@ class TrainingControllerTest {
     Mapper mockMapper;
 
     @Test
-    void shouldOpenInexPage() throws Exception {
+    void shouldOpenStartPage() throws Exception {
 	this.mockMvc.perform(get("/"))
 		.andExpect(status().isOk())
 		.andExpect(content().string(containsString("Trainings")));
