@@ -21,8 +21,8 @@
 						<th>Avg speed (km/h)</th>
 						<th>Calories</th>
 						<th>Comments</th>
-						<th>Edit</th>
-						<th>Delete</th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -34,13 +34,13 @@
 						<td th:text="${#numbers.formatDecimal(training.avgSpeed, 2, 2)}"></td>
 						<td th:text="${training.kCalBurned}"></td>
 						<td th:text="${training.comment}"></td>
-						<td><a th:href="@{/edit/{id}(id=${training.id})}">Edit</a></td>
-						<td><a th:href="@{/delete/{id}(id=${training.id})}">Delete</a></td>
+						<td><a th:href="@{/edit/{id}(id=${training.id})}" class="btn btn-success">Edit</a></td>
+						<td><a th:href="@{/delete/{id}(id=${training.id})}" class="btn btn-danger">Delete</a></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<p><a th:href="@{/add}">Add Training</a></p>
+		<p><a th:href="@{/add}" class="btn btn-primary">Add Training</a></p>
 	</div>
 </body>
 
