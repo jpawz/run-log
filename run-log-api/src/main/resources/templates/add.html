@@ -10,6 +10,9 @@
 
 <body>
 	<div class="card mx-auto" style="width: 30rem;">
+		<div class="card-header">
+			Add new training
+		</div>
 		<div class="card-body">
 			<form action="#" th:action="@{/add}" th:object="${trainingDTO}" method="post">
 				<div th:insert="fragments/form :: form"></div>
