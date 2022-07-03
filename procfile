@@ -1,1 +1,1 @@
-web java $JAVA_OPTS -Dserver.port=$PORT -jar run-log-api-0.0.1-SNAPSHOT.jar $JAR_OPTS 
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* RunLogApplicatoin --port $PORT
