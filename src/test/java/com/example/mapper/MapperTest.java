@@ -21,18 +21,18 @@ class MapperTest {
 
 	TrainingDTO dto = mapper.toDto(training);
 
-	assertThat(dto.getDurationH()).isEqualTo(1);
-	assertThat(dto.getDurationM()).isEqualTo(2);
-	assertThat(dto.getDurationS()).isEqualTo(5);
+	assertThat(dto.getDurationHours()).isEqualTo(1);
+	assertThat(dto.getDurationMinutes()).isEqualTo(2);
+	assertThat(dto.getDurationSeconds()).isEqualTo(5);
     }
 
     @Test
     void shoudProperlyCombineHoursMinutesSecondsIntoSecondsDuration() {
 	Training training = new Training();
 	TrainingDTO trainingDto = new TrainingDTO();
-	trainingDto.setDurationH(2);
-	trainingDto.setDurationM(0);
-	trainingDto.setDurationS(10);
+	trainingDto.setDurationHours(2);
+	trainingDto.setDurationMinutes(0);
+	trainingDto.setDurationSeconds(10);
 
 	Mapper mapper = new Mapper();
 	training = mapper.toTraining(trainingDto);
@@ -41,14 +41,14 @@ class MapperTest {
     }
 
     @Test
-    void shouldProperlyCalculateAvgSpeed() {
+    void shouldProperlyCalculateAverageSpeed() {
 	Training training = new Training();
 	training.setDuration(2 * oneHour + 0 * oneMinute + 0); // two hour, 0 minutes, 0 seconds
-	training.setDistanceInKilometer(10);
+	training.setDistanceInKilometers(10);
 	Mapper mapper = new Mapper();
 
 	TrainingDTO dto = mapper.toDto(training);
 
-	assertThat(dto.getAvgSpeed()).isEqualTo(5);
+	assertThat(dto.getAverageSpeed()).isEqualTo(5);
     }
 }

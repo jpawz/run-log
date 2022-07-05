@@ -9,34 +9,34 @@ import com.example.domain.TrainingDTO;
 public class Mapper {
 
     public TrainingDTO toDto(Training training) {
-	int durationS = toSeconds(training.getDuration());
-	int durationM = toMinutes(training.getDuration());
-	int durationH = toHours(training.getDuration());
+	int durationSeconds = toSeconds(training.getDuration());
+	int durationMinutes = toMinutes(training.getDuration());
+	int durationHours = toHours(training.getDuration());
 
 	TrainingDTO dto = new TrainingDTO();
 
 	dto.setId(training.getId());
 	dto.setComment(training.getComment());
 	dto.setDate(training.getDate());
-	dto.setDistanceInKilometer(training.getDistanceInKilometer());
-	dto.setDurationH(durationH);
-	dto.setDurationM(durationM);
-	dto.setDurationS(durationS);
+	dto.setDistanceInKilometers(training.getDistanceInKilometers());
+	dto.setDurationHours(durationHours);
+	dto.setDurationMinutes(durationMinutes);
+	dto.setDurationSeconds(durationSeconds);
 	dto.setkCalBurned(training.getkCalBurned());
-	dto.setAvgSpeed(60 * 60 * training.getDistanceInKilometer() / training.getDuration());
+	dto.setAverageSpeed(60 * 60 * training.getDistanceInKilometers() / training.getDuration());
 
 	return dto;
     }
 
     public Training toTraining(TrainingDTO trainingDTO) {
-	int duration = toSeconds(trainingDTO.getDurationH(), trainingDTO.getDurationM(),
-		trainingDTO.getDurationS());
+	int duration = toSeconds(trainingDTO.getDurationHours(), trainingDTO.getDurationMinutes(),
+		trainingDTO.getDurationSeconds());
 	Training training = new Training();
 	training.setId(trainingDTO.getId());
 	training.setDuration(duration);
 	training.setComment(trainingDTO.getComment());
 	training.setDate(trainingDTO.getDate());
-	training.setDistanceInKilometer(trainingDTO.getDistanceInKilometer());
+	training.setDistanceInKilometers(trainingDTO.getDistanceInKilometers());
 	training.setkCalBurned(trainingDTO.getkCalBurned());
 
 	return training;

@@ -18,7 +18,7 @@ public class Training {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
-    private double distanceInKilometer;
+    private double distanceInKilometers;
     private int duration;
     private double kCalBurned;
     private String comment;
@@ -27,10 +27,10 @@ public class Training {
 
     }
 
-    public Training(LocalDate date, double distanceInKilometer, int duration, double kCalBurned, String comment) {
+    public Training(LocalDate date, double distanceInKilometers, int duration, double kCalBurned, String comment) {
 	super();
 	this.date = date;
-	this.distanceInKilometer = distanceInKilometer;
+	this.distanceInKilometers = distanceInKilometers;
 	this.duration = duration;
 	this.kCalBurned = kCalBurned;
 	this.comment = comment;
@@ -52,12 +52,12 @@ public class Training {
 	this.date = date;
     }
 
-    public double getDistanceInKilometer() {
-	return distanceInKilometer;
+    public double getDistanceInKilometers() {
+	return distanceInKilometers;
     }
 
-    public void setDistanceInKilometer(double distanceInKilometer) {
-	this.distanceInKilometer = distanceInKilometer;
+    public void setDistanceInKilometers(double distanceInKilometers) {
+	this.distanceInKilometers = distanceInKilometers;
     }
 
     public int getDuration() {
