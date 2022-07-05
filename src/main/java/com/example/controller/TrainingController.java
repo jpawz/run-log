@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import javax.validation.Valid;
@@ -33,7 +32,7 @@ public class TrainingController {
     public String index(Model model) {
 	List<TrainingDTO> trainings = StreamSupport.stream(service.getAllTrainings().spliterator(), false)
 		.map(mapper::toDto)
-		.collect(Collectors.toList());
+		.toList();
 	model.addAttribute("trainings", trainings);
 	return "index";
     }
