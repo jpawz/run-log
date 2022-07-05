@@ -18,6 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import com.example.domain.Training;
 import com.example.repository.TrainingRepository;
@@ -27,6 +29,7 @@ import com.example.repository.TrainingRepository;
 class TrainingControllerTest {
 
     private String url;
+    private MultiValueMap<String, String> params;
 
     @LocalServerPort
     private int port;
@@ -39,6 +42,15 @@ class TrainingControllerTest {
 
     @BeforeEach
     public void setUp() throws Exception {
+	params = new LinkedMultiValueMap<>();
+	params.add("date", "2022-07-03");
+	params.add("distanceInKilometers", "5");
+	params.add("durationHours", "0");
+	params.add("durationMinutes", "30");
+	params.add("durationSeconds", "0");
+	params.add("kCalBurned", "600");
+	params.add("comment", "");
+
 	repository.deleteAll();
 	this.url = "http://localhost:" + port + "/";
     }
@@ -67,33 +79,22 @@ class TrainingControllerTest {
     void shouldAddNewTraining() throws Exception {
 	int initialSize = (int) repository.findAll().spliterator().getExactSizeIfKnown();
 
-	mockMvc.perform(post(url + "add")
-		.param("date", "2022-07-03")
-		.param("distanceInKilometers", "5")
-		.param("durationHours", "0")
-		.param("durationMinutes", "30")
-		.param("durationSeconds", "0")
-		.param("kCalBurned", "600")
-		.param("comment", "")
+	mockMvc.perform(post(url + "add").params(params)
 		.contentType(MediaType.APPLICATION_FORM_URLENCODED))
 		.andExpect(status().is3xxRedirection())
 		.andExpect(redirectedUrl("/index"));
 
 	assertThat(repository.findAll().spliterator().getExactSizeIfKnown()).isEqualTo(initialSize + 1);
     }
-    
+
     @Test
     void shouldAddNewTrainingWithFloatingPointDistance() throws Exception {
 	int initialSize = (int) repository.findAll().spliterator().getExactSizeIfKnown();
 
+	params.set("distanceInKilometer", "5.02");
+
 	mockMvc.perform(post(url + "add")
-		.param("date", "2022-07-03")
-		.param("distanceInKilometer", "5.02")
-		.param("durationH", "0")
-		.param("durationM", "30")
-		.param("durationS", "0")
-		.param("kCalBurned", "600")
-		.param("comment", "")
+		.params(params)
 		.contentType(MediaType.APPLICATION_FORM_URLENCODED))
 		.andExpect(status().is3xxRedirection())
 		.andExpect(redirectedUrl("/index"));
@@ -103,13 +104,10 @@ class TrainingControllerTest {
 
     @Test
     void shouldNotAddNewTrainingWithoutDate() throws Exception {
+	params.remove("date");
+
 	mockMvc.perform(post(url + "add")
-		.param("distanceInKilometers", "5")
-		.param("durationHours", "0")
-		.param("durationMinutes", "30")
-		.param("durationSeconds", "0")
-		.param("kCalBurned", "600")
-		.param("comment", "")
+		.params(params)
 		.contentType(MediaType.APPLICATION_FORM_URLENCODED));
 
 	assertThat(repository.findAll().spliterator().getExactSizeIfKnown()).isZero();
@@ -120,16 +118,11 @@ class TrainingControllerTest {
 	repository.save(new Training(LocalDate.of(2022, 7, 4), 10, 3600, 800, ""));
 	Training training = repository.findAll().iterator().next();
 	int initialSize = (int) repository.findAll().spliterator().getExactSizeIfKnown();
+	params.add("id", String.valueOf(training.getId()));
+	params.set("comment", "The comment");
 
 	mockMvc.perform(post(url + "update/{id}", training.getId())
-		.param("id", String.valueOf(training.getId()))
-		.param("date", "2022-07-04")
-		.param("distanceInKilometers", "7")
-		.param("durationHours", "1")
-		.param("durationMinutes", "0")
-		.param("durationSeconds", "0")
-		.param("kCalBurned", "800")
-		.param("comment", "The comment")
+		.params(params)
 		.contentType(MediaType.APPLICATION_FORM_URLENCODED))
 		.andExpect(status().is3xxRedirection())
 		.andExpect(redirectedUrl("/index"));
