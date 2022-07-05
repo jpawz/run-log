@@ -21,6 +21,8 @@ import com.example.service.TrainingService;
 @Controller
 public class TrainingController {
 
+    private static final String REDIRECT_TO_HOMEPAGE = "redirect:/index";
+
     @Autowired
     private TrainingService service;
 
@@ -50,7 +52,7 @@ public class TrainingController {
 	}
 
 	service.saveTraining(mapper.toTraining(trainingDTO));
-	return "redirect:/index";
+	return REDIRECT_TO_HOMEPAGE;
     }
 
     @GetMapping("/edit/{id}")
@@ -69,12 +71,12 @@ public class TrainingController {
 	}
 
 	service.saveTraining(mapper.toTraining(trainingDTO));
-	return "redirect:/index";
+	return REDIRECT_TO_HOMEPAGE;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteTraining(@PathVariable("id") int id, Model model) {
 	service.deleteTrainingById(id);
-	return "redirect:/index";
+	return REDIRECT_TO_HOMEPAGE;
     }
 }
