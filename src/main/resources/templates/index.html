@@ -28,10 +28,10 @@
 				<tbody>
 					<tr th:each="training : ${trainings}">
 						<td th:text="${training.date}"></td>
-						<td th:text="${training.durationH + ':' + training.durationM + ':' + training.durationS}">
+						<td th:text="${training.durationHours + ':' + training.durationMinutes + ':' + training.durationSeconds}">
 						</td>
-						<td th:text="${training.distanceInKilometer}"></td>
-						<td th:text="${#numbers.formatDecimal(training.avgSpeed, 2, 2)}"></td>
+						<td th:text="${training.distanceInKilometers}"></td>
+						<td th:text="${#numbers.formatDecimal(training.averageSpeed, 2, 2)}"></td>
 						<td th:text="${training.kCalBurned}"></td>
 						<td th:text="${training.comment}"></td>
 						<td><a th:href="@{/edit/{id}(id=${training.id})}" class="btn btn-success">Edit</a></td>

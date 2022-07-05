@@ -17,31 +17,31 @@ public class TrainingDTO {
     private LocalDate date;
 
     @Min(value = 0, message = "The distance cannot be set to less than zero.")
-    private double distanceInKilometer;
+    private double distanceInKilometers;
 
     private double kCalBurned;
     
     private String comment;
 
     @Min(value = 0, message = "The hours cannot be set to less than zero.")
-    private int durationH;
+    private int durationHours;
 
     @Min(value = 0, message = "The minutes cannot be set to less than zero.")
     @Max(value = 59, message = "No more than 59 minutes can be set.")
-    private int durationM;
+    private int durationMinutes;
 
     @Min(value = 0, message = "The seconds cannot be set to less than zero.")
     @Max(value = 59, message = "No more than 59 seconds can be set.")
-    private int durationS;
+    private int durationSeconds;
     
-    private double avgSpeed;
+    private double averageSpeed;
 
-    public double getAvgSpeed() {
-	return avgSpeed;
+    public double getAverageSpeed() {
+	return averageSpeed;
     }
 
-    public void setAvgSpeed(double avgSpeed) {
-	this.avgSpeed = avgSpeed;
+    public void setAverageSpeed(double averageSpeed) {
+	this.averageSpeed = averageSpeed;
     }
 
     public int getId() {
@@ -60,12 +60,12 @@ public class TrainingDTO {
 	this.date = date;
     }
 
-    public double getDistanceInKilometer() {
-	return distanceInKilometer;
+    public double getDistanceInKilometers() {
+	return distanceInKilometers;
     }
 
-    public void setDistanceInKilometer(double distanceInKilometer) {
-	this.distanceInKilometer = distanceInKilometer;
+    public void setDistanceInKilometers(double distanceInKilometers) {
+	this.distanceInKilometers = distanceInKilometers;
     }
 
     public double getkCalBurned() {
@@ -84,28 +84,28 @@ public class TrainingDTO {
 	this.comment = comment;
     }
 
-    public int getDurationH() {
-	return durationH;
+    public int getDurationHours() {
+	return durationHours;
     }
 
-    public void setDurationH(int durationH) {
-	this.durationH = durationH;
+    public void setDurationHours(int durationHours) {
+	this.durationHours = durationHours;
     }
 
-    public int getDurationM() {
-	return durationM;
+    public int getDurationMinutes() {
+	return durationMinutes;
     }
 
-    public void setDurationM(int durationM) {
-	this.durationM = durationM;
+    public void setDurationMinutes(int durationMinutes) {
+	this.durationMinutes = durationMinutes;
     }
 
-    public int getDurationS() {
-	return durationS;
+    public int getDurationSeconds() {
+	return durationSeconds;
     }
 
-    public void setDurationS(int durationS) {
-	this.durationS = durationS;
+    public void setDurationSeconds(int durationSeconds) {
+	this.durationSeconds = durationSeconds;
     }
 
 }
