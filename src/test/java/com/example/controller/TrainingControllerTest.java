@@ -81,6 +81,25 @@ class TrainingControllerTest {
 
 	assertThat(repository.findAll().spliterator().getExactSizeIfKnown()).isEqualTo(initialSize + 1);
     }
+    
+    @Test
+    void shouldAddNewTrainingWithFloatingPointDistance() throws Exception {
+	int initialSize = (int) repository.findAll().spliterator().getExactSizeIfKnown();
+
+	mockMvc.perform(post(url + "add")
+		.param("date", "2022-07-03")
+		.param("distanceInKilometer", "5.02")
+		.param("durationH", "0")
+		.param("durationM", "30")
+		.param("durationS", "0")
+		.param("kCalBurned", "600")
+		.param("comment", "")
+		.contentType(MediaType.APPLICATION_FORM_URLENCODED))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(redirectedUrl("/index"));
+
+	assertThat(repository.findAll().spliterator().getExactSizeIfKnown()).isEqualTo(initialSize + 1);
+    }
 
     @Test
     void shouldNotAddNewTrainingWithoutDate() throws Exception {
