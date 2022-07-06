@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Run Log</title>
-	<link th:href = "@{/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -16,9 +16,9 @@
 				<thead>
 					<tr>
 						<th>Date</th>
-						<th>Duration (hh:mm:ss)</th>
-						<th>Distance</th>
-						<th>Avg speed (km/h)</th>
+						<th>Duration</th>
+						<th>Distance (km)</th>
+						<th>Average speed (km/h)</th>
 						<th>Calories</th>
 						<th>Comments</th>
 						<th></th>
@@ -28,11 +28,13 @@
 				<tbody>
 					<tr th:each="training : ${trainings}">
 						<td th:text="${training.date}"></td>
-						<td th:text="${training.durationHours + ':' + training.durationMinutes + ':' + training.durationSeconds}">
+						<td th:text="${#numbers.formatInteger(training.durationHours, 2) + ':' 
+							+ #numbers.formatInteger(training.durationMinutes, 2) + ':' 
+							+ #numbers.formatInteger(training.durationSeconds, 2)}">
 						</td>
-						<td th:text="${training.distanceInKilometers}"></td>
-						<td th:text="${#numbers.formatDecimal(training.averageSpeed, 2, 2)}"></td>
-						<td th:text="${training.kCalBurned}"></td>
+						<td th:text="${#numbers.formatDecimal(training.distanceInKilometers, 1, 2)}"></td>
+						<td th:text="${#numbers.formatDecimal(training.averageSpeed, 1, 2)}"></td>
+						<td th:text="${#numbers.formatInteger(training.kCalBurned, 0)}"></td>
 						<td th:text="${training.comment}"></td>
 						<td><a th:href="@{/edit/{id}(id=${training.id})}" class="btn btn-success">Edit</a></td>
 						<td><a th:href="@{/delete/{id}(id=${training.id})}" class="btn btn-danger">Delete</a></td>
