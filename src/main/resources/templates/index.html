@@ -11,16 +11,16 @@
 <body>
 	<div class="container">
 		<div th:switch="${trainings}">
-			<h2>Trainings</h2>
+			<h2 th:text="#{trainings}"></h2>
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Date</th>
-						<th>Duration</th>
-						<th>Distance (km)</th>
-						<th>Average speed (km/h)</th>
-						<th>Calories</th>
-						<th>Comments</th>
+						<th th:text="#{training.date}"></th>
+						<th th:text="#{training.duration}"></th>
+						<th th:text="#{training.distance}"></th>
+						<th th:text="#{training.avgspeed}"></th>
+						<th th:text="#{training.calories}"></th>
+						<th th:text="#{training.comments}"></th>
 						<th></th>
 						<th></th>
 					</tr>
@@ -36,13 +36,15 @@
 						<td th:text="${#numbers.formatDecimal(training.averageSpeed, 1, 2)}"></td>
 						<td th:text="${#numbers.formatInteger(training.kCalBurned, 0)}"></td>
 						<td th:text="${training.comment}"></td>
-						<td><a th:href="@{/edit/{id}(id=${training.id})}" class="btn btn-success">Edit</a></td>
-						<td><a th:href="@{/delete/{id}(id=${training.id})}" class="btn btn-danger">Delete</a></td>
+						<td><a th:href="@{/edit/{id}(id=${training.id})}" class="btn btn-success" th:text="#{edit}"></a>
+						</td>
+						<td><a th:href="@{/delete/{id}(id=${training.id})}" class="btn btn-danger"
+								th:text="#{delete}"></a></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<p><a th:href="@{/add}" class="btn btn-primary">Add Training</a></p>
+		<p><a th:href="@{/add}" class="btn btn-primary" th:text="#{add}"></a></p>
 	</div>
 </body>
 

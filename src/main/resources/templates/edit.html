@@ -3,18 +3,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8" />
-	<title>Run Log</title>
-	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<meta charset="UTF-8" />
+<title>Run Log</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 
 <body>
 	<div class="card mx-auto" style="width: 30rem;">
-		<div class="card-header">
-			Edit training
-		</div>
+		<div class="card-header" th:text="#{edit.header}"></div>
 		<div class="card-body">
-			<form action="#" th:action="@{/update/{id}(id=${trainingDTO.id})}" th:object="${trainingDTO}" method="post">
+			<form action="#" th:action="@{/update/{id}(id=${trainingDTO.id})}"
+				th:object="${trainingDTO}" method="post">
 				<div th:insert="fragments/form :: form"></div>
 			</form>
 		</div>

@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.LinkedMultiValueMap;
@@ -33,6 +35,9 @@ class TrainingControllerTest {
 
     @LocalServerPort
     private int port;
+
+    @Autowired
+    private MessageSource messageSource;
 
     @Autowired
     private MockMvc mockMvc;
@@ -58,13 +63,15 @@ class TrainingControllerTest {
     @Test
     void shouldOpenStartPage() throws Exception {
 	mockMvc.perform(get(url))
-		.andExpect(content().string(containsString("Training")));
+		.andExpect(content()
+			.string(containsString(messageSource.getMessage("trainings", null, Locale.getDefault()))));
     }
 
     @Test
     void shouldOpenAddNewTrainingPage() throws Exception {
 	mockMvc.perform(get(url + "add"))
-		.andExpect(content().string(containsString("Add new training")));
+		.andExpect(content()
+			.string(containsString(messageSource.getMessage("add.header", null, Locale.getDefault()))));
     }
 
     @Test
@@ -72,7 +79,8 @@ class TrainingControllerTest {
 	Training training = repository.save(new Training(LocalDate.of(2022, 7, 4), 10, 3600, 800, ""));
 
 	mockMvc.perform(get(url + "edit/{id}", training.getId()))
-		.andExpect(content().string(containsString("Edit training")));
+		.andExpect(content()
+			.string(containsString(messageSource.getMessage("edit.header", null, Locale.getDefault()))));
     }
 
     @Test
