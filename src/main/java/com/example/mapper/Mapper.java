@@ -5,6 +5,10 @@ import org.springframework.stereotype.Component;
 import com.example.domain.Training;
 import com.example.domain.TrainingDTO;
 
+/**
+ * Converts {@link Training} to {@link TrainingDTO} and vice versa.
+ *
+ */
 @Component
 public class Mapper {
 

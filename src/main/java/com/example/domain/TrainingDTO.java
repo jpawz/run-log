@@ -8,6 +8,12 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * Class that represents TrainingDTO object. The class serves as an intermediary
+ * between persistence and presentation layer. It contains fields required to
+ * create, edit and display the {@link Training}.
+ *
+ */
 public class TrainingDTO {
 
     private int id;
@@ -20,7 +26,7 @@ public class TrainingDTO {
     private double distanceInKilometers;
 
     private double kCalBurned;
-    
+
     private String comment;
 
     @Min(value = 0, message = "The hours cannot be set to less than zero.")
@@ -33,7 +39,7 @@ public class TrainingDTO {
     @Min(value = 0, message = "The seconds cannot be set to less than zero.")
     @Max(value = 59, message = "No more than 59 seconds can be set.")
     private int durationSeconds;
-    
+
     private double averageSpeed;
 
     public double getAverageSpeed() {

@@ -9,6 +9,10 @@ import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * Class that represents a training entity. The class contains fields such as
+ * date of training, distance, duration, calories and comments.
+ */
 @Entity
 public class Training {
 
@@ -23,10 +27,22 @@ public class Training {
     private double kCalBurned;
     private String comment;
 
+    /**
+     * Empty constructor required for Hibernate.
+     */
     public Training() {
 
     }
 
+    /**
+     * Creates a training object.
+     * 
+     * @param date                 - date of training (yyyy-MM-dd)
+     * @param distanceInKilometers - distance traveled
+     * @param duration             - duration of training in seconds
+     * @param kCalBurned           - calories burned during training
+     * @param comment              - comment on training
+     */
     public Training(LocalDate date, double distanceInKilometers, int duration, double kCalBurned, String comment) {
 	super();
 	this.date = date;
