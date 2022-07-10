@@ -116,12 +116,11 @@ public class TrainingController {
     /**
      * Deletes training by ID.
      * 
-     * @param id    - ID of training.
-     * @param model
+     * @param id - ID of training.
      * @return
      */
     @GetMapping("/delete/{id}")
-    public String deleteTraining(@PathVariable("id") int id, Model model) {
+    public String deleteTraining(@PathVariable("id") int id) {
 	repository.deleteById(id);
 	return REDIRECT_TO_HOMEPAGE;
     }
